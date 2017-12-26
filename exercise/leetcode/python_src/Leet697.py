@@ -16,12 +16,15 @@ class Solution:
         leftIdxs = {}
         rightIdxs = {}
         for i in range(len(nums)):
-            if nums[i] in degreeSet:
-                if nums[i] not in leftIdxs:
-                    leftIdxs[nums[i]] = i
-
-        for c in degreeSet:
-            minLen = min(self.findLeftAndRight(nums, c), minLen)
+            if nums[i] in degreeSet and nums[i] not in leftIdxs:
+                leftIdxs[nums[i]] = i
+        
+        for i in range(len(nums) - 1, -1, -1):
+            if nums[i] in degreeSet and nums[i] not in rightIdxs:
+                rightIdxs[nums[i]] = i
+        minLen = 1000000000   
+        for k in leftIdxs:
+            minLen = min(rightIdxs[k] - leftIdxs[k] + 1, minLen)
         return minLen
 
     def findLeftAndRight(self, nums, v):
@@ -36,3 +39,6 @@ class Solution:
 if __name__ == "__main__":
     s = Solution()
     print(s.findShortestSubArray([1, 2, 2, 3, 1]))
+    for j in range(6, 1, -1):
+        print(j)
+    input("press any key to continue")
