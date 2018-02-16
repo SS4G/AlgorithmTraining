@@ -24,16 +24,26 @@ class MyStack:
         Removes the element on top of the stack and returns that element.
         :rtype: int
         """
-        
-        while len(len(self.queue1))
-
+        thisQueue = self.queue1 if self.storeFlag else self.queue2
+        otherQueue = self.queue2 if self.storeFlag else self.queue1
+        while len(thisQueue) > 1:
+            otherQueue.append(thisQueue.popleft())
+        self.storeFlag = not self.storeFlag
+        return thisQueue.popleft()
 
     def top(self):
         """
         Get the top element.
         :rtype: int
         """
-
+        thisQueue = self.queue1 if self.storeFlag else self.queue2
+        otherQueue = self.queue2 if self.storeFlag else self.queue1
+        while len(thisQueue) > 1:
+            otherQueue.append(thisQueue.popleft())
+        self.storeFlag = not self.storeFlag
+        res = thisQueue.popleft()
+        otherQueue.append(res)
+        return res
 
     def empty(self):
         """
